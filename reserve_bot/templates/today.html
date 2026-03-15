@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>今日の予約</title>
+<style>
+body {
+    font-family: Arial;
+    background: #0f172a;
+    color: white;
+    text-align: center;
+}
+
+.container {
+    width: 400px;
+    margin: auto;
+}
+
+.card {
+    background: #1e293b;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 12px;
+}
+
+.time {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.free { background: #22c55e; }
+.busy { background: #ef4444; }
+.rest { background: #64748b; }
+
+.invite {
+    background: #3b82f6;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    display: inline-block;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="card">
+<h2>🤖 Bot導入</h2>
+<a class="invite" href="{{invite}}" target="_blank">
+Botをサーバーに追加
+</a>
+</div>
+
+<div class="card">
+<h2>📅 今日の予約</h2>
+
+{% for time, user_id, locked in data %}
+
+    {% if locked == 1 %}
+        <div class="time rest">{{time}} - 休憩</div>
+
+    {% elif user_id %}
+        <div class="time busy">{{time}} - 予約済</div>
+
+    {% else %}
+        <div class="time free">{{time}} - 空き</div>
+
+    {% endif %}
+
+{% endfor %}
+
+</div>
+</div>
+</body>
+</html>
